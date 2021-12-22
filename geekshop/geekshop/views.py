@@ -5,7 +5,7 @@ from mainapp.models import Product
 
 def index(request):
     title = 'Geekshop'
-    products = Product.objects.all()[:3]
+    products = Product.objects.all()[:5]
 
     context = {
         'title': title,
