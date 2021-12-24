@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 
 def products(request, pk=None):
-    print(pk)
+    # print(pk)
     title = 'каталог'
 
     links_menu = [
