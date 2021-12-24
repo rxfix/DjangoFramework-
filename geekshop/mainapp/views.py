@@ -1,7 +1,8 @@
 from django.shortcuts import render
 
 
-def products(request):
+def products(request, pk=None):
+    # print(pk)
     title = 'каталог'
 
     links_menu = [
