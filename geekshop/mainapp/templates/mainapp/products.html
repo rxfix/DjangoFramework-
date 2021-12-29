@@ -34,11 +34,11 @@
     <div class="details-products">
         <div class="details-slider">
             <div class="slider-product">
-                <img src="{% static 'geekshop/img/slider1.jpg' %}">
+                <img src="{{ hot_product.image.url }}">
             </div>
             <div class="slider-control">
                 <div class="block">
-                    <a href="#"><img src="{% static 'geekshop/img/controll.jpg' %}" alt="">
+                    <a href="#"><img src="{% static '/geekshop/img/controll.jpg' %}" alt="">
                         <div class="text"></div>
                     </a>
                 </div>
@@ -106,7 +106,7 @@
                                                               alt=""></a>
             </div>
             <div class="related-products clearfix">
-                {% for product in products %}
+                {% for product in same_products %}
                 <div class="block">
                     <a href="{% url 'basket:add' pk=product.pk %}"><img src="/media/{{ product.image }}" alt="">
                         <div class="text">
