@@ -8,12 +8,12 @@ from mainapp.models import Product
 def basket(request):
     title = 'корзина'
     basket_items = Basket.objects.filter(user=request.user).order_by('product__category')
+
     context = {
         'title': title,
         'basket_items': basket_items,
-
     }
-    return render(request, 'basketapp/basket.html', context)
+    return render(request, 'basketapp/basket.html', context=context)
 
 
 def basket_add(request, pk):
