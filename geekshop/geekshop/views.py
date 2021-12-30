@@ -4,6 +4,7 @@ from basketapp.models import Basket
 from mainapp.models import Product
 
 
+
 def index(request):
     title = 'Geekshop'
     products = Product.objects.all()[:5]
