@@ -59,7 +59,7 @@
             <h3 class="big-bold">{{ hot_product.short_desc }}</h3>
             <h3 class="red">горячее предложение</h3>
             <p class="price"> {{ hot_product.price }} <span>руб</span></p>
-            <a href="{% url 'basket:add' pk=hot_product.pk %}" class="red-button">
+            <a href="{% url 'mainapp:detail' pk=hot_product.pk %}" class="red-button">
                 заказать <i class="fa fa-chevron-right" aria-hidden="true"></i>
             </a>
             <div class="description-text">
@@ -82,7 +82,7 @@
             <div class="related-products clearfix">
                 {% for product in products %}
                 <div class="block">
-                    <a href="{% url 'basket:add' pk=product.pk %}">
+                    <a href="{% url 'mainapp:detail' pk=product.pk %}">
                         <img src="/media/{{ product.image }}" alt="product">
                         <div class="text">
                             <img src="{% static '/geekshop/img/icon-hover.png' %}" alt="hover">
@@ -104,10 +104,10 @@
 
                 {% for product in same_products %}
                 <div class="block">
-                    <a href="{% url 'basket:add' pk=product.pk %}">
+                    <a href="{% url 'mainapp:detail' pk=product.pk %}">
                         <img src="/media/{{ product.image }}" alt="">
                         <div class="text">
-                            <img src="{% static '/geekshop/img/icon-hoverm.png' %}" alt="img">
+                            <img src="{% static '/geekshop/img/icon-hover.png' %}" alt="hover">
                             <h4>{{ product.name }}</h4>
                             <p>{{ product.description }} </p>
                         </div>
