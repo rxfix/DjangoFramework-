@@ -85,7 +85,7 @@
                     <a href="{% url 'basket:add' pk=product.pk %}">
                         <img src="/media/{{ product.image }}" alt="product">
                         <div class="text">
-                            <img src="{% static 'img/icon-hover.png' %}" alt="hover">
+                            <img src="{% static '/geekshop/img/icon-hover.png' %}" alt="hover">
                             <h4>{{ product.name }}</h4>
                             <p>{{ product.description }}</p>
                         </div>
@@ -101,11 +101,13 @@
                                                               alt=""></a>
             </div>
             <div class="related-products clearfix">
+
                 {% for product in same_products %}
                 <div class="block">
-                    <a href="{% url 'basket:add' pk=product.pk %}"><img src="/media/{{ product.image }}" alt="">
+                    <a href="{% url 'basket:add' pk=product.pk %}">
+                        <img src="/media/{{ product.image }}" alt="">
                         <div class="text">
-                            <img src="{% static 'geekshop/img/icon-hover.png' %}" alt="img">
+                            <img src="{% static '/geekshop/img/icon-hoverm.png' %}" alt="img">
                             <h4>{{ product.name }}</h4>
                             <p>{{ product.description }} </p>
                         </div>
