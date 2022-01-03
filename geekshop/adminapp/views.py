@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import user_passes_test
 
-# from adminapp.forms import ShopUserAdminEditForm
+from adminapp.forms import ShopUserAdminEditForm
 from authapp.forms import ShopUserRegisterForm
 
 from authapp.models import ShopUser
