@@ -139,8 +139,16 @@ def product_create(request, pk):
 
 @user_passes_test(lambda u: u.is_superuser)
 def product_read(request, pk):
-    pass
+    title = 'продукт/подробно'
 
+    product = get_object_or_404(Product, pk=pk)
+
+    context = {
+        'title': title,
+        'object': product,
+    }
+
+    return render(request, 'adminapp/product_read.html', context)
 
 @user_passes_test(lambda u: u.is_superuser)
 def product_update(request, pk):
