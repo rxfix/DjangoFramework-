@@ -26,6 +26,10 @@ class UsersListView(ListView):
         context['title'] = 'админка/пользователи'
         return context
 
+    def get_queryset(self):
+        # return ShopUser.objects.filter(is_active=True).order_by('-is_active', '-is_superuser', '-is_staff', 'username')
+        return ShopUser.objects.all().order_by('-is_active', '-is_superuser', '-is_staff', 'username')
+
 
 # @user_passes_test(lambda u: u.is_superuser)
 # def users(request):
@@ -242,6 +246,10 @@ def product_create(request, pk):
 
     return render(request, 'adminapp/product_update.html', context)
 
+
+class ProductDetailView(DeleteView):
+    model = Product
+    template_name = 'adminapp/product_read.html'
 
 @user_passes_test(lambda u: u.is_superuser)
 def product_read(request, pk):
