@@ -2,18 +2,18 @@
 {% load static %}
 
 {% block css %}
-<link rel="stylesheet" type="text/css" href="{% static '/mainapp/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/mainapp/style.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="hero-white">
-    <div class="header clearfix">
-        {% include 'geekshop/includes/main_menu.html' %}
-        <a href="#" class="basket"></a>
+    <div class="hero-white">
+        <div class="header clearfix">
+            {% include 'geekshop/includes/main_menu.html' %}
+            <a href="#" class="basket"></a>
+        </div>
     </div>
-</div>
 
-<div class="details">
+    <div class="details">
     <div class="links clearfix">
         <ul class="links-menu">
             <li>
@@ -22,11 +22,11 @@
                 </a>
             </li>
             {% for link in links_menu %}
-            <li><a href="{% url 'products:category' link.pk %}"
-                   class="{% if request.resolver_match.kwargs.pk|add:'0' == link.pk %} active {% endif %}">
-                {{link.name}}
-            </a></a>
-            </li>
+                <li><a href="{% url 'products:category' link.pk %}"
+                       class="{% if request.resolver_match.kwargs.pk|add:'0' == link.pk %} active {% endif %}">
+                    {{ link.name }}
+                </a></a>
+                </li>
             {% endfor %}
         </ul>
     </div>
@@ -71,16 +71,37 @@
 
     <div class="products_list">
 
-        <div class="related">
-            <div class="title clearfix">
-                {% if category %}
+    <div class="related">
+        <div class="title clearfix">
+            {% if category %}
                 <h2>
                     Категория: "{{ category.name|title }}"
                 </h2>
+            {% endif %}
+        </div>
+        <div class="related-products clearfix">
+
+
+            <div class="paginator">
+                {% if products.has_previous %}
+                    <a href="{% url 'products:page' category.pk products.previous_page_number %}">
+                        <
+                    </a>
+                {% endif %}
+                <span class="current">
+            страница {{ products.number }} из
+            {{ products.paginator.num_pages }}
+          </span>
+                {% if products.has_next %}
+                    <a href="{% url 'products:page' category.pk products.next_page_number %}">
+                        >
+                    </a>
                 {% endif %}
             </div>
-            <div class="related-products clearfix">
-                {% for product in products %}
+
+
+
+            {% for product in products %}
                 <div class="block">
                     <a href="{% url 'mainapp:detail' pk=product.pk %}">
                         <img src="/media/{{ product.image }}" alt="product">
@@ -91,18 +112,18 @@
                         </div>
                     </a>
                 </div>
-                {% endfor %}
-            </div>
+            {% endfor %}
         </div>
-        <div class="related">
-            <div class="title clearfix">
-                <h2>Похожие продукты</h2>
-                <a class="explore" href="#">показать все <img src="{% static 'geekshop/img/arrow.png' %}"
-                                                              alt=""></a>
-            </div>
-            <div class="related-products clearfix">
+    </div>
+    <div class="related">
+        <div class="title clearfix">
+            <h2>Похожие продукты</h2>
+            <a class="explore" href="#">показать все <img src="{% static 'geekshop/img/arrow.png' %}"
+                                                          alt=""></a>
+        </div>
+        <div class="related-products clearfix">
 
-                {% for product in same_products %}
+            {% for product in same_products %}
                 <div class="block">
                     <a href="{% url 'mainapp:detail' pk=product.pk %}">
                         <img src="/media/{{ product.image }}" alt="">
@@ -113,9 +134,9 @@
                         </div>
                     </a>
                 </div>
-                {% endfor %}
-            </div>
+            {% endfor %}
         </div>
+    </div>
 
 
-        {% endblock %}
+{% endblock %}
