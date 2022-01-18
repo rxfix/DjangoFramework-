@@ -1,4 +1,6 @@
+from django.conf import settings
 from django.contrib import auth
+from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -35,6 +37,7 @@ def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('index'))
 
+
 def register(request):
     title = 'регистрация'
 
@@ -69,3 +72,15 @@ def edit(request):
     content = {'title': title, 'edit_form': edit_form}
 
     return render(request, 'authapp/edit.html', content)
+
+
+def send_verify_mail(user):
+    verify_link = reverse('auth:verify', args=[user.email, user.activation_key])
+    title = f'Подтверждение учетной записи {user.username}'
+    message = f'Для активации учетной записи {user.username} на портале {settings.DOMAIN_NAME} пройдите по ссылке: \n' \
+              f'{settings.DOMANE_NAME}{verify_link}'
+    return send_mail(title, message, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)
+
+
+def verify(request):
+    pass
