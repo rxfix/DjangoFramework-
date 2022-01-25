@@ -45,7 +45,13 @@ def register(request):
         register_form = ShopUserRegisterForm(request.POST, request.FILES)
 
         if register_form.is_valid():
-            register_form.save()
+            user = register_form.save()
+            if send_verify_mail(user):
+                print('Сообщение отправлено')
+
+            else:
+                print('Ошибка отправки почты')
+
             return HttpResponseRedirect(reverse('auth:login'))
     else:
         register_form = ShopUserRegisterForm()
@@ -78,7 +84,7 @@ def send_verify_mail(user):
     verify_link = reverse('auth:verify', args=[user.email, user.activation_key])
     title = f'Подтверждение учетной записи {user.username}'
     message = f'Для активации учетной записи {user.username} на портале {settings.DOMAIN_NAME} пройдите по ссылке: \n' \
-              f'{settings.DOMANE_NAME}{verify_link}'
+              f'{settings.DOMAIN_NAME}{verify_link}'
     return send_mail(title, message, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)
 
 
