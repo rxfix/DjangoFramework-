@@ -1,9 +1,12 @@
+from collections import OrderedDict
+from urllib.parse import urlunparse, urlencode
+
 import requests
 from django.utils import timezone
 
 
 def save_user_profile(backend, user, response, *args, **kwargs):
-    if backend.name != 'vk-oauth2'
+    if backend.name != 'vk-oauth2':
         return
 
     api_url = urlunparse(('https,'
