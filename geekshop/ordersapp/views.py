@@ -29,27 +29,29 @@ class OrderCreate(CreateView):
     def get_context_data(self, **kwargs):
         context = super(OrderCreate, self).get_context_data(**kwargs)
         OrderFormSet = inlineformset_factory(Order, OrderItem, form=OrderItemForm, extra=1)
+
         if self.request.POST:
             formset = OrderFormSet(self.request.POST)
         else:
-            basket_items = Basket.objects.filter(uset=self.request.user)
+            basket_items = Basket.objects.filter(user=self.request.user)
             if len(basket_items):
-                OrderFormSet = inlineformset_factory(Order, OrderItemForm, form=OrderItemForm, extra=len(basket_item))
+                OrderFormSet = inlineformset_factory(Order, OrderItem, form=OrderItemForm, extra=len(basket_items))
                 formset = OrderFormSet()
                 for num, form in enumerate(formset.forms):
                     form.initial['product'] = basket_items[num].product
                     form.initial['quantity'] = basket_items[num].quantity
-                    form.initial['price'] = basket_items[num].price
+                    form.initial['price'] = basket_items[num].product.price
                 basket_items.delete()
             else:
                 formset = OrderFormSet()
 
-        context['orderitem'] = formset
+        context['orderitems'] = formset
+
         return context
 
     def form_valid(self, form):
         context = self.get_context_data()
-        orderitems = context['orderitem']
+        orderitems = context['orderitems']
 
         with transaction.atomic():
             form.instance.user = self.request.user
