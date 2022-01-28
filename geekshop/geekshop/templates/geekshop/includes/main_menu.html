@@ -18,12 +18,23 @@
                 Профиль
             </a>
         </li>
+
+
+        <li class="dropdown-item">
+            <a href="{% url 'ordersapp:orders_list' %}">
+                Заказы
+            </a>
+        </li>
+
+
         {% if user.is_superuser %}
         <li class="dropdown-item">
             <a href="{% url 'admin_staff:users' %}">
                 админка
             </a>
         </li>
+
+
         {% endif %}
     </ul>
 
