@@ -108,6 +108,6 @@ def verify(request, email, activation_key):
             print(f'Ошибка активации: {user}')
             return  render(request, 'authapp/verification.html')
     except Exception as err:
-        print(f'Ошибка активации: {err.user}')
+        print(f'Ошибка активации: {err.args}')
         return HttpResponseRedirect(reverse('index'))
 
