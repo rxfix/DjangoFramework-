@@ -15,7 +15,7 @@
     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
         <li class="dropdown-item">
             <a href="{% url 'auth:edit' %}">
-                {{ user.first_name|default:'Пользователь' }}
+                Профиль
             </a>
         </li>
         {% if user.is_superuser %}
