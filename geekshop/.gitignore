@@ -1,4 +1,4 @@
-env/
+git checkoutenv/
 .idea/
 db.sqlite3
 !/geekshop/.env
