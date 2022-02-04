@@ -31,6 +31,12 @@ DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['*']
 
+INTERNAL_IPS = [
+    # ...
+    "127.0.0.1",
+    # ...
+]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -64,6 +70,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 
 ]
 
@@ -208,7 +215,6 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.user.user_details',
 )
 
-
 if DEBUG:
     def show_toolbar(request):
         return True
@@ -232,5 +238,5 @@ if DEBUG:
         'debug_toolbar.panels.logging.LoggingPanel',
         'debug_toolbar.panels.redirects.RedirectsPanel',
         'debug_toolbar.panels.profiling.ProfilingPanel',
-        'template_profiler_panel.panels.template.TemplateProfilerPanel',
+        # 'template_profiler_panel.panels.template.TemplateProfilerPanel',
     ]
