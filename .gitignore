@@ -1,4 +1,5 @@
 env/
 .idea
 db.sqlite3
-!/geekshop/.env
+/geekshop/geekshop/.env
+**/__pycache__
