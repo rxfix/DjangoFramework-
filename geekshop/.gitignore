@@ -1,4 +1,0 @@
-env/
-.idea/
-db.sqlite3
-!/geekshop/.env
